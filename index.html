@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kado Digital Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header class="preview-banner">
+            <p class="subtitle">UNTUK ORANG</p>
+            <h1 id="preview-title" class="main-title">HADIAH BUAT ...</h1>
+        </header>
+
+        <main class="builder-panel">
+            
+            <div class="builder-item">
+                <div class="item-left">
+                    <span class="status-dot active"></span>
+                    <div class="item-text">
+                        <h3>Template</h3>
+                        <p>Pilih gaya kado visual.</p>
+                    </div>
+                </div>
+                <div class="item-right">
+                    <select id="input-template">
+                        <option value="Orbit Kenangan" selected>Orbit Kenangan</option>
+                        <option value="Taman Bunga">Taman Bunga</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="builder-item">
+                <div class="item-left">
+                    <span class="status-dot active"></span>
+                    <div class="item-text">
+                        <h3>Untuk siapa</h3>
+                        <p>Nama yang muncul di kado.</p>
+                    </div>
+                </div>
+                <div class="item-right">
+                    <input type="text" id="input-target" placeholder="Ketik nama di sini...">
+                </div>
+            </div>
+
+            <div class="builder-item section-divider">
+                <div class="item-left">
+                    <span class="status-dot process"></span>
+                    <div class="item-text">
+                        <h3>Orbit — Foto (Maks 4)</h3>
+                        <p>Pilih sampai 4 foto terbaikmu.</p>
+                    </div>
+                </div>
+                <div class="item-right">
+                    <label for="input-foto" class="btn-upload-label">Pilih Foto</label>
+                    <input type="file" id="input-foto" accept="image/*" multiple style="display:none;">
+                    <span id="info-foto" class="counter gray">0/4</span>
+                </div>
+            </div>
+
+            <div class="builder-item">
+                <div class="item-left">
+                    <span class="status-dot process"></span>
+                    <div class="item-text">
+                        <h3>Isi Surat</h3>
+                        <p>Pesan manis yang ingin disampaikan.</p>
+                    </div>
+                </div>
+                <div class="item-right">
+                    <textarea id="input-surat" placeholder="Tulis suratmu..." style="border:none; outline:none; text-align:right; resize:none; font-size:12px; height:40px; width:100%;"></textarea>
+                </div>
+            </div>
+
+            <div class="builder-item">
+                <div class="item-left">
+                    <span class="status-dot process"></span>
+                    <div class="item-text">
+                        <h3>Musik Latar (MP3)</h3>
+                        <p>Pilih lagu romantis format .mp3</p>
+                    </div>
+                </div>
+                <div class="item-right">
+                    <label for="input-musik" class="btn-upload-label">Pilih Lagu</label>
+                    <input type="file" id="input-musik" accept="audio/mp3, audio/mpeg" style="display:none;">
+                    <span id="info-musik" class="counter gray">Belum ada</span>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="sticky-footer">
+            <div class="status-ready">
+                <span class="check-icon">✓</span> Siap dikirim
+            </div>
+            <button id="btn-publish" class="btn-publish">DAPATKAN LINK →</button>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+                          </html>
