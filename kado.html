@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kado Spesial Untukmu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, #231019 0%, #0f050a 100%);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+        .orbit-container {
+            position: relative;
+            width: 260px;
+            height: 260px;
+            border: 1px dashed rgba(223, 170, 107, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 20s linear infinite;
+            margin-bottom: 30px;
+        }
+        .center-heart {
+            position: absolute;
+            font-family: 'Cinzel', serif;
+            color: #dfaa6b;
+            animation: float 4s ease-in-out infinite;
+            z-index: 10;
+        }
+        .orbit-item {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: #231019;
+            border-radius: 50%;
+            border: 2px solid #dfaa6b;
+            overflow: hidden;
+            display: none; /* Sembunyikan default, muncul jika ada foto */
+        }
+        .orbit-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .item-1 { top: -27px; left: 102px; display: block; }
+        .item-2 { bottom: -27px; left: 102px; display: block; }
+        .item-3 { top: 102px; left: -27px; display: block; }
+        .item-4 { top: 102px; right: -27px; display: block; }
+
+        .surat-box {
+            width: 100%;
+            max-width: 320px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            line-height: 1.6;
+            color: #eaeaea;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes float { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+
+    <audio id="bgm" loop></audio>
+
+    <div class="orbit-container">
+        <div class="center-heart">
+            <h2 id="view-nama">UNTUKMU</h2>
+        </div>
+        <div class="orbit-item item-1"><img id="img-1" src=""></div>
+        <div class="orbit-item item-2"><img id="img-2" src=""></div>
+        <div class="orbit-item item-3"><img id="img-3" src=""></div>
+        <div class="orbit-item item-4"><img id="img-4" src=""></div>
+    </div>
+
+    <div class="surat-box">
+        <p id="view-surat">Membuka kado...</p>
+    </div>
+
+    <p style="margin-top: 20px; color: #8c8a86; font-size: 12px; letter-spacing: 0.5px;">🎵 Ketuk layar di mana saja untuk memutar musik</p>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const encodedData = urlParams.get('data');
+
+        if (encodedData) {
+            try {
+                // Ekstrak data terkompresi dari URL parameter
+                const decodedData = decodeURIComponent(escape(atob(encodedData)));
+                const kado = JSON.parse(decodedData);
+
+                // Tampilkan Nama & Surat
+                document.getElementById('view-nama').innerHTML = `UNTUK<br>${kado.n.toUpperCase()}`;
+                document.getElementById('view-surat').innerText = kado.s;
+                
+                // Pasang Foto-Foto ke dalam Orbit secara dinamis
+                if (kado.f && kado.f.length > 0) {
+                    kado.f.forEach((fotoSrc, index) => {
+                        const imgEl = document.getElementById(`img-${index + 1}`);
+                        if (imgEl) imgEl.src = fotoSrc;
+                    });
+                }
+
+                // Pasang file audio musik latar belakang
+                if (kado.m) {
+                    const audio = document.getElementById('bgm');
+                    audio.src = kado.m;
+
+                    // Musik otomatis berjalan setelah interaksi ketukan pertama di layar HP penerima
+                    document.body.addEventListener('click', () => {
+                        audio.play().catch(err => console.log("Izin audio browser aktif"));
+                    });
+                }
+
+            } catch (e) {
+                document.getElementById('view-surat').innerText = "Oops! Link kado ini rusak atau file terlalu besar untuk dimuat browser.";
+                console.error(e);
+            }
+        } else {
+            document.getElementById('view-surat').innerText = "Data kado kosong. Buat kadomu di halaman utama.";
+        }
+    </script>
+</body>
+</html>
