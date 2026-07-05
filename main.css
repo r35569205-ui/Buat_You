@@ -1,0 +1,16 @@
+.btn-upload-label {
+    background-color: #f0ede9;
+    color: #3d1e2b;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #dcdad5;
+    transition: background-color 0.2s;
+    margin-right: 8px;
+}
+
+.btn-upload-label:hover {
+    background-color: #e3dfda;
+}
